@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "摄像头变焦", "摄像头变焦\摄像头变焦.vcxproj", "{0A75CB49-DCCD-41C4-B980-D3F81EE05269}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "双摄", "双摄\双摄.vcxproj", "{44215105-6FFC-48B7-ACA6-B8F1719110FA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "融合", "融合\融合.vcxproj", "{F2894066-26BE-43CB-8238-4920FAFB5B63}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "多尺度KCF", "多尺度KCF\多尺度KCF.vcxproj", "{6323C1A4-FA29-43D2-9690-8A2A6FBA80B7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "运动目标检测", "运动目标检测\运动目标检测.vcxproj", "{23F17662-9403-46E8-B2B2-E8DE0B37197D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,14 +17,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0A75CB49-DCCD-41C4-B980-D3F81EE05269}.Debug|x64.ActiveCfg = Debug|x64
-		{0A75CB49-DCCD-41C4-B980-D3F81EE05269}.Debug|x64.Build.0 = Debug|x64
-		{0A75CB49-DCCD-41C4-B980-D3F81EE05269}.Debug|x86.ActiveCfg = Debug|Win32
-		{0A75CB49-DCCD-41C4-B980-D3F81EE05269}.Debug|x86.Build.0 = Debug|Win32
-		{0A75CB49-DCCD-41C4-B980-D3F81EE05269}.Release|x64.ActiveCfg = Release|x64
-		{0A75CB49-DCCD-41C4-B980-D3F81EE05269}.Release|x64.Build.0 = Release|x64
-		{0A75CB49-DCCD-41C4-B980-D3F81EE05269}.Release|x86.ActiveCfg = Release|Win32
-		{0A75CB49-DCCD-41C4-B980-D3F81EE05269}.Release|x86.Build.0 = Release|Win32
 		{44215105-6FFC-48B7-ACA6-B8F1719110FA}.Debug|x64.ActiveCfg = Debug|x64
 		{44215105-6FFC-48B7-ACA6-B8F1719110FA}.Debug|x64.Build.0 = Debug|x64
 		{44215105-6FFC-48B7-ACA6-B8F1719110FA}.Debug|x86.ActiveCfg = Debug|Win32
@@ -33,14 +25,22 @@ Global
 		{44215105-6FFC-48B7-ACA6-B8F1719110FA}.Release|x64.Build.0 = Release|x64
 		{44215105-6FFC-48B7-ACA6-B8F1719110FA}.Release|x86.ActiveCfg = Release|Win32
 		{44215105-6FFC-48B7-ACA6-B8F1719110FA}.Release|x86.Build.0 = Release|Win32
-		{F2894066-26BE-43CB-8238-4920FAFB5B63}.Debug|x64.ActiveCfg = Debug|x64
-		{F2894066-26BE-43CB-8238-4920FAFB5B63}.Debug|x64.Build.0 = Debug|x64
-		{F2894066-26BE-43CB-8238-4920FAFB5B63}.Debug|x86.ActiveCfg = Debug|Win32
-		{F2894066-26BE-43CB-8238-4920FAFB5B63}.Debug|x86.Build.0 = Debug|Win32
-		{F2894066-26BE-43CB-8238-4920FAFB5B63}.Release|x64.ActiveCfg = Release|x64
-		{F2894066-26BE-43CB-8238-4920FAFB5B63}.Release|x64.Build.0 = Release|x64
-		{F2894066-26BE-43CB-8238-4920FAFB5B63}.Release|x86.ActiveCfg = Release|Win32
-		{F2894066-26BE-43CB-8238-4920FAFB5B63}.Release|x86.Build.0 = Release|Win32
+		{6323C1A4-FA29-43D2-9690-8A2A6FBA80B7}.Debug|x64.ActiveCfg = Debug|x64
+		{6323C1A4-FA29-43D2-9690-8A2A6FBA80B7}.Debug|x64.Build.0 = Debug|x64
+		{6323C1A4-FA29-43D2-9690-8A2A6FBA80B7}.Debug|x86.ActiveCfg = Debug|Win32
+		{6323C1A4-FA29-43D2-9690-8A2A6FBA80B7}.Debug|x86.Build.0 = Debug|Win32
+		{6323C1A4-FA29-43D2-9690-8A2A6FBA80B7}.Release|x64.ActiveCfg = Release|x64
+		{6323C1A4-FA29-43D2-9690-8A2A6FBA80B7}.Release|x64.Build.0 = Release|x64
+		{6323C1A4-FA29-43D2-9690-8A2A6FBA80B7}.Release|x86.ActiveCfg = Release|Win32
+		{6323C1A4-FA29-43D2-9690-8A2A6FBA80B7}.Release|x86.Build.0 = Release|Win32
+		{23F17662-9403-46E8-B2B2-E8DE0B37197D}.Debug|x64.ActiveCfg = Debug|x64
+		{23F17662-9403-46E8-B2B2-E8DE0B37197D}.Debug|x64.Build.0 = Debug|x64
+		{23F17662-9403-46E8-B2B2-E8DE0B37197D}.Debug|x86.ActiveCfg = Debug|Win32
+		{23F17662-9403-46E8-B2B2-E8DE0B37197D}.Debug|x86.Build.0 = Debug|Win32
+		{23F17662-9403-46E8-B2B2-E8DE0B37197D}.Release|x64.ActiveCfg = Release|x64
+		{23F17662-9403-46E8-B2B2-E8DE0B37197D}.Release|x64.Build.0 = Release|x64
+		{23F17662-9403-46E8-B2B2-E8DE0B37197D}.Release|x86.ActiveCfg = Release|Win32
+		{23F17662-9403-46E8-B2B2-E8DE0B37197D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
