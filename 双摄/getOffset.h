@@ -15,8 +15,8 @@ void getDualOffset(cv::Mat img_wide, cv::Mat img_long)
 		cv::cvtColor(img_long, img_long_gray, cv::COLOR_BGR2GRAY);
 		cv::GaussianBlur(img_wide_gray, img_wide_gray, cv::Size(9, 9), 2, 2);
 		cv::GaussianBlur(img_long_gray, img_long_gray, cv::Size(9, 9), 2, 2);
-		cv::HoughCircles(img_wide_gray, circles_wide, CV_HOUGH_GRADIENT, 1, img_wide_gray.rows / 8, 60, 40);
-		cv::HoughCircles(img_long_gray, circles_long, CV_HOUGH_GRADIENT, 1, img_long_gray.rows / 8, 60, 40);
+		cv::HoughCircles(img_wide_gray, circles_wide, cv::HOUGH_GRADIENT, 1, img_wide_gray.rows / 8, 60, 40);
+		cv::HoughCircles(img_long_gray, circles_long, cv::HOUGH_GRADIENT, 1, img_long_gray.rows / 8, 60, 40);
 		//记录圆心在两图之间的坐标差
 		if (!circles_wide.empty() && !circles_long.empty())
 		{
