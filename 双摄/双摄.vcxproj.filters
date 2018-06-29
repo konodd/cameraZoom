@@ -26,5 +26,14 @@
     <ClInclude Include="getOffset.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="middle_plan.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="back_control.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="xl320_param.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,0 +1,44 @@
+#pragma once
+
+//adress of XL-320
+#define ADDR_ID 3
+#define ADDR_BAUD_RATE 4
+#define ADDR_OPERATING_MODE 11
+#define ADDR_TORQUE_ENABLE 24
+#define ADDR_LED 25
+#define ADDR_GOAL_POSITION 30
+#define ADDR_GOAL_VELOCITY 32
+#define ADDR_GOAL_TORQUE 35
+#define ADDR_PRESENT_POSITION 37
+#define ADDR_PRESENT_VELOCITY 39
+#define ADDR_PRESENT_LOAD 41
+#define ADDR_MOVING 49
+
+//data byte length
+#define LEN_ID 1
+#define LEN_BAUD_RATE 1
+#define LEN_OPERATING_MODE 1
+#define LEN_TORQUE_ENABLE 1
+#define LEN_LED 1
+#define LEN_GOAL_POSITION 2
+#define LEN_GOAL_VELOCITY 2
+#define LEN_GOAL_TORQUE 2
+#define LEN_PRESENT_POSITION 2
+#define LEN_PRESENT_VELOCITY 2
+#define LEN_PRESENT_LOAD 2
+#define LEN_MOVING 1
+
+//others
+#if defined(_WIN64)
+#define DEVICENAME "/COM6"
+#else 
+#define DEVICENAME "/dev/ttyUSB0"
+#endif
+#define PROTOCOL_VERSION 2.0
+#define BAUDRATE 57600
+#define MAXPOSITION 1023
+#define MINPOSITION 0
+#define DXL1_MAXPOSITION 850
+#define DXL1_MINPOSITION 450
+#define DXL2_MAXPOSITION 600
+#define DXL2_MINPOSITION 150
