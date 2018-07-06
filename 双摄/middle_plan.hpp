@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <fstream>
 #include <string>
 #include <vector>
@@ -20,16 +20,16 @@ class planToolBox
 public:
 	planToolBox();
 	~planToolBox();
-	bool getPosition(int x, int y);              //²é±í£¬¼ÆËã£¨x,y£©¶ÔÓ¦µÄ¶æ»úÎ»ÖÃ
-	void getPoints();                            //¼ÓÔØ±ê¶¨±íÖĞµÄÊı¾İ
-	bool setDataPath(std::string data_path);     //ÉèÖÃ±ê¶¨±íÂ·¾¶
-	void getDXLPosition(int &dxl1, int &dxl2);   //»ñÈ¡¶æ»úÎ»ÖÃ
+	bool getPosition(int x, int y);              //æŸ¥è¡¨ï¼Œè®¡ç®—ï¼ˆx,yï¼‰å¯¹åº”çš„èˆµæœºä½ç½®
+	void getPoints();                            //åŠ è½½æ ‡å®šè¡¨ä¸­çš„æ•°æ®
+	bool setDataPath(std::string data_path);     //è®¾ç½®æ ‡å®šè¡¨è·¯å¾„
+	void getDXLPosition(int &dxl1, int &dxl2);   //è·å–èˆµæœºä½ç½®
 
 private:
-	bool triVal(int x, int y);                                //Èı½ÇÆ½»¬´¦Àí
-	bool isInTriangle(myPoint p1, myPoint p2, myPoint p3);    //ÅĞ¶ÏÄ¿±êµãÊÇ·ñÔÚÈı½ÇĞÎp1p2p3ÄÚ²¿
-	void smoothing(myPoint p1, myPoint p2, myPoint p3);       //¶şÎ¬Ó³ÉäÈıÎ¬£¬¼ÆËã¶æ»úÎ»ÖÃ
-	static bool sortFun(myPoint p1, myPoint p2);              //°´ÕÕ±ê¶¨±íÖĞµã¾àÀëÄ¿±êµãµÄ¾àÀëÅÅĞò
+	bool triVal(int x, int y);                                //ä¸‰è§’å¹³æ»‘å¤„ç†
+	bool isInTriangle(myPoint p1, myPoint p2, myPoint p3);    //åˆ¤æ–­ç›®æ ‡ç‚¹æ˜¯å¦åœ¨ä¸‰è§’å½¢p1p2p3å†…éƒ¨
+	void smoothing(myPoint p1, myPoint p2, myPoint p3);       //äºŒç»´æ˜ å°„ä¸‰ç»´ï¼Œè®¡ç®—èˆµæœºä½ç½®
+	static bool sortFun(myPoint p1, myPoint p2);              //æŒ‰ç…§æ ‡å®šè¡¨ä¸­ç‚¹è·ç¦»ç›®æ ‡ç‚¹çš„è·ç¦»æ’åº
 	myPoint p;
 	std::vector<myPoint> points;
 	std::ifstream in;

@@ -1,4 +1,4 @@
-#include "front_vision.hpp"
+ï»¿#include "front_vision.hpp"
 #include <string>
 #include <vector>
 
@@ -15,7 +15,7 @@ int fps()
 	++frameCount;
 
 	int curTime = cv::getTickCount();
-	if ((curTime - lastTime) / cv::getTickFrequency() > 1.0) // È¡¹Ì¶¨Ê±¼ä¼ä¸ôÎª1Ãë
+	if ((curTime - lastTime) / cv::getTickFrequency() > 1.0) // å–å›ºå®šæ—¶é—´é—´éš”ä¸º1ç§’
 	{
 		fps = frameCount;
 		frameCount = 0;
@@ -26,11 +26,11 @@ int fps()
 
 int main(int argc, char **argv)
 {
-	visionToolbox vtb = visionToolbox();                                           //ÊÓ¾õ¹¤¾ßÏä
-	cv::VideoCapture cap_wide(1);                                                  //¹ã½ÇÉãÏñÍ·
-	cv::VideoCapture cap_long(2);                                                  //³¤½¹ÉãÏñÍ·
-	std::vector<cv::Rect> face_boxes;                                              //ÈËÁ³¿ò
-	cv::Rect tracking_box;                                                         //¸ú×ÙÄ¿±ê
+	visionToolbox vtb = visionToolbox();                                           //è§†è§‰å·¥å…·ç®±
+	cv::VideoCapture cap_wide(1);                                                  //å¹¿è§’æ‘„åƒå¤´
+	cv::VideoCapture cap_long(2);                                                  //é•¿ç„¦æ‘„åƒå¤´
+	std::vector<cv::Rect> face_boxes;                                              //äººè„¸æ¡†
+	cv::Rect tracking_box;                                                         //è·Ÿè¸ªç›®æ ‡
 	cv::Rect show_box;
 	cv::Mat frame_wide;
 	cv::Mat frame_long;
@@ -77,12 +77,12 @@ int main(int argc, char **argv)
 				{
 					show_box.width = tracking_box.width * 2;
 					show_box.height = tracking_box.height * 1.5;
-					//ÓÒ±ß½ç
+					//å³è¾¹ç•Œ
 					if (tracking_box.x + tracking_box.width * 1.5 > frame_wide.cols)
 					{
 						show_box.x = frame_wide.cols - show_box.width;
 					}
-					//×ó±ß½ç
+					//å·¦è¾¹ç•Œ
 					else if (tracking_box.x - tracking_box.width * 0.5 < 0)
 					{
 						show_box.x = 0;
@@ -91,12 +91,12 @@ int main(int argc, char **argv)
 					{
 						show_box.x = tracking_box.x - tracking_box.width / 2;
 					}
-					//ÏÂ±ß½ç
+					//ä¸‹è¾¹ç•Œ
 					if (tracking_box.y + tracking_box.height * 1.25 > frame_wide.rows)
 					{
 						show_box.y = frame_wide.rows - show_box.height;
 					}
-					//ÉÏ±ß½ç
+					//ä¸Šè¾¹ç•Œ
 					else if (tracking_box.y - tracking_box.height * 0.25 < 0)
 					{
 						show_box.y = 0;
@@ -122,7 +122,7 @@ int main(int argc, char **argv)
 			}
 		}
 
-		//ÏÔÊ¾Í¼Æ¬¼°°´¼ü²Ù×÷
+		//æ˜¾ç¤ºå›¾ç‰‡åŠæŒ‰é”®æ“ä½œ
 		sprintf(str, "FPS:%d", fps());
 		cv::putText(frame_wide, str, cv::Point(540, 30), cv::FONT_HERSHEY_SIMPLEX, 0.8, cv::Scalar(255, 0, 0));
 		cv::imshow("wide", frame_wide);
@@ -130,7 +130,7 @@ int main(int argc, char **argv)
 		int opt = cv::waitKey(10);
 		switch (opt)
 		{
-		case ' ':                                //ÖØĞÂ¼ì²â
+		case ' ':                                //é‡æ–°æ£€æµ‹
 			is_detected = false;
 			break;
 		case 'p':

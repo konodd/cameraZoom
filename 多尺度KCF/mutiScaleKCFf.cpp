@@ -1,4 +1,4 @@
-#include <opencv2\opencv.hpp>
+ï»¿#include <opencv2\opencv.hpp>
 //#include <opencv2\tracking\tracker.hpp>
 #include <string>
 #include <vector>
@@ -13,7 +13,7 @@ int fps()
 	++frameCount;
 
 	int curTime = cv::getTickCount();
-	if ((curTime - lastTime) / cv::getTickFrequency() > 1.0) // È¡¹Ì¶¨Ê±¼ä¼ä¸ôÎª1Ãë
+	if ((curTime - lastTime) / cv::getTickFrequency() > 1.0) // å–å›ºå®šæ—¶é—´é—´éš”ä¸º1ç§’
 	{
 		fps = frameCount;
 		frameCount = 0;
@@ -24,10 +24,10 @@ int fps()
 
 int main(int argc, char **argv)
 {
-	cv::CascadeClassifier cas("E:/ROS/xl320_driver/haarcascades/haarcascade_frontalface_alt.xml");  //¼¶Áª¼ì²â
+	cv::CascadeClassifier cas("E:/ROS/xl320_driver/haarcascades/haarcascade_frontalface_alt.xml");  //çº§è”æ£€æµ‹
 	cv::VideoCapture cap(0);
-	std::vector<cv::Rect> face_boxes;                                              //ÈËÁ³¿ò
-	cv::Rect2d tracking_box;                                                       //¸ú×ÙÄ¿±ê
+	std::vector<cv::Rect> face_boxes;                                              //äººè„¸æ¡†
+	cv::Rect2d tracking_box;                                                       //è·Ÿè¸ªç›®æ ‡
 	cv::Mat frame;
 	cv::Mat frame_face;
 
@@ -47,12 +47,12 @@ int main(int argc, char **argv)
 		{
 			continue;
 		}
-		//¼ì²â
+		//æ£€æµ‹
 		if (!is_detected)
 		{
 			cv::putText(frame, "detecting face", cv::Point(0, 20), cv::FONT_HERSHEY_COMPLEX, 0.6, cv::Scalar(255, 0, 0));
 			cas.detectMultiScale(frame, face_boxes);
-			//¼ì²âµ½Ä¿±êºó£¬³õÊ¼»¯¸ú×ÙÄ£¿é
+			//æ£€æµ‹åˆ°ç›®æ ‡åï¼Œåˆå§‹åŒ–è·Ÿè¸ªæ¨¡å—
 			if (!face_boxes.empty())
 			{
 				tracking_box = face_boxes[0];
@@ -60,7 +60,7 @@ int main(int argc, char **argv)
 				is_detected = true;
 			}
 		}
-		//¸ú×Ù
+		//è·Ÿè¸ª
 		else
 		{
 			try
@@ -76,17 +76,17 @@ int main(int argc, char **argv)
 				is_detected = false;
 			}
 		}
-		//ÏÔÊ¾Í¼Æ¬¼°°´¼ü²Ù×÷
+		//æ˜¾ç¤ºå›¾ç‰‡åŠæŒ‰é”®æ“ä½œ
 		sprintf(str, "FPS:%d", fps());
 		cv::putText(frame, str, cv::Point(540, 30), cv::FONT_HERSHEY_SIMPLEX, 0.8, cv::Scalar(255, 0, 0));
 		cv::imshow("test", frame);
 		int opt = cv::waitKey(10);
 		switch (opt)
 		{
-		case 'p':                                //ÔİÍ£
+		case 'p':                                //æš‚åœ
 			cv::waitKey(0);
 			break;
-		case ' ':                                //ÖØĞÂ¼ì²â
+		case ' ':                                //é‡æ–°æ£€æµ‹
 			is_detected = false;
 			break;
 		case 'q':

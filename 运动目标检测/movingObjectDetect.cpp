@@ -1,4 +1,4 @@
-///ÔË¶¯ÎïÌå¼ì²â¡ª¡ªÖ¡²î·¨  
+ï»¿///è¿åŠ¨ç‰©ä½“æ£€æµ‹â€”â€”å¸§å·®æ³•  
 #include"opencv2/opencv.hpp"  
 #include<opencv2/highgui/highgui.hpp>
 #include<opencv2/core/core.hpp>
@@ -16,7 +16,7 @@ int fps()
 	++frameCount;
 
 	int curTime = cv::getTickCount();
-	if ((curTime - lastTime) / cv::getTickFrequency() > 1.0) // È¡¹Ì¶¨Ê±¼ä¼ä¸ôÎª1Ãë
+	if ((curTime - lastTime) / cv::getTickFrequency() > 1.0) // å–å›ºå®šæ—¶é—´é—´éš”ä¸º1ç§’
 	{
 		fps = frameCount;
 		frameCount = 0;
@@ -25,42 +25,42 @@ int fps()
 	return fps;
 }
 
-//ÔË¶¯ÎïÌå¼ì²âº¯ÊıÉùÃ÷  
+//è¿åŠ¨ç‰©ä½“æ£€æµ‹å‡½æ•°å£°æ˜  
 Mat MoveDetect(Mat temp, Mat frame)
 {
 	Mat result = frame.clone();
-	//1.½«backgroundºÍframe×ªÎª»Ò¶ÈÍ¼  
+	//1.å°†backgroundå’Œframeè½¬ä¸ºç°åº¦å›¾  
 	Mat gray1, gray2;
 	cvtColor(temp, gray1, CV_BGR2GRAY);
 	cvtColor(frame, gray2, CV_BGR2GRAY);
-	//2.½«backgroundºÍframe×ö²î  
+	//2.å°†backgroundå’Œframeåšå·®  
 	Mat diff;
 	absdiff(gray1, gray2, diff);
 	//imshow("diff", diff);
-	//3.¶Ô²îÖµÍ¼diff_thresh½øĞĞãĞÖµ»¯´¦Àí  
+	//3.å¯¹å·®å€¼å›¾diff_threshè¿›è¡Œé˜ˆå€¼åŒ–å¤„ç†  
 	Mat diff_thresh;
 	threshold(diff, diff_thresh, 50, 255, CV_THRESH_BINARY);
 	//imshow("diff_thresh", diff_thresh);
-	//4.¸¯Ê´  
+	//4.è…èš€  
 	Mat kernel_erode = getStructuringElement(MORPH_RECT, Size(3, 3));
 	Mat kernel_dilate = getStructuringElement(MORPH_RECT, Size(18, 18));
 	erode(diff_thresh, diff_thresh, kernel_erode);
 	//imshow("erode", diff_thresh);
-	//5.ÅòÕÍ  
+	//5.è†¨èƒ€  
 	dilate(diff_thresh, diff_thresh, kernel_dilate);
 	//imshow("dilate", diff_thresh);
-	//6.²éÕÒÂÖÀª²¢»æÖÆÂÖÀª  
+	//6.æŸ¥æ‰¾è½®å»“å¹¶ç»˜åˆ¶è½®å»“  
 	vector<vector<Point> > contours;
 	findContours(diff_thresh, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
-	drawContours(result, contours, -1, Scalar(0, 0, 255), 2);//ÔÚresultÉÏ»æÖÆÂÖÀª  
-															 //7.²éÕÒÕıÍâ½Ó¾ØĞÎ  
+	drawContours(result, contours, -1, Scalar(0, 0, 255), 2);//åœ¨resultä¸Šç»˜åˆ¶è½®å»“  
+															 //7.æŸ¥æ‰¾æ­£å¤–æ¥çŸ©å½¢  
 	vector<Rect> boundRect(contours.size());
 	for (int i = 0; i < contours.size(); i++)
 	{
 		boundRect[i] = boundingRect(contours[i]);
-		rectangle(result, boundRect[i], Scalar(0, 255, 0), 2);//ÔÚresultÉÏ»æÖÆÕıÍâ½Ó¾ØĞÎ  
+		rectangle(result, boundRect[i], Scalar(0, 255, 0), 2);//åœ¨resultä¸Šç»˜åˆ¶æ­£å¤–æ¥çŸ©å½¢  
 	}
-	return result;//·µ»Øresult  
+	return result;//è¿”å›result  
 }
 
 
@@ -69,35 +69,35 @@ int main()
 {
 
 	VideoCapture video(0);
-	Mat frame;//´æ´¢Ö¡  
-	Mat temp;//´æ´¢Ç°Ò»Ö¡Í¼Ïñ  
-	Mat result;//´æ´¢½á¹ûÍ¼Ïñ  
+	Mat frame;//å­˜å‚¨å¸§  
+	Mat temp;//å­˜å‚¨å‰ä¸€å¸§å›¾åƒ  
+	Mat result;//å­˜å‚¨ç»“æœå›¾åƒ  
 	char a[20];
 	bool is_first = true;
 	if (!video.isOpened())
 		return -1;
 	while (1)
 	{
-		video >> frame;//¶ÁÖ¡½øframe  
+		video >> frame;//è¯»å¸§è¿›frame  
 		//imshow("frame", frame);
-		if (frame.empty())//¶ÔÖ¡½øĞĞÒì³£¼ì²â  
+		if (frame.empty())//å¯¹å¸§è¿›è¡Œå¼‚å¸¸æ£€æµ‹  
 		{
 			cout << "frame is empty!" << endl;
 			break;
 		}
-		if (is_first)//Èç¹ûÎªµÚÒ»Ö¡£¨temp»¹Îª¿Õ£©  
+		if (is_first)//å¦‚æœä¸ºç¬¬ä¸€å¸§ï¼ˆtempè¿˜ä¸ºç©ºï¼‰  
 		{
-			result = MoveDetect(frame, frame);//µ÷ÓÃMoveDetect()½øĞĞÔË¶¯ÎïÌå¼ì²â£¬·µ»ØÖµ´æÈëresult  
+			result = MoveDetect(frame, frame);//è°ƒç”¨MoveDetect()è¿›è¡Œè¿åŠ¨ç‰©ä½“æ£€æµ‹ï¼Œè¿”å›å€¼å­˜å…¥result  
 			is_first = false;
 		}
-		else//Èô²»ÊÇµÚÒ»Ö¡£¨tempÓĞÖµÁË£©  
+		else//è‹¥ä¸æ˜¯ç¬¬ä¸€å¸§ï¼ˆtempæœ‰å€¼äº†ï¼‰  
 		{
-			result = MoveDetect(temp, frame);//µ÷ÓÃMoveDetect()½øĞĞÔË¶¯ÎïÌå¼ì²â£¬·µ»ØÖµ´æÈëresult  
+			result = MoveDetect(temp, frame);//è°ƒç”¨MoveDetect()è¿›è¡Œè¿åŠ¨ç‰©ä½“æ£€æµ‹ï¼Œè¿”å›å€¼å­˜å…¥result  
 		}
 		sprintf(a, "FPS:%d", fps());
 		putText(result, a, cv::Point(500, 30), FONT_HERSHEY_SIMPLEX, 1.0, cv::Scalar(0, 0, 255));
 		imshow("result", result);
-		if (waitKey(10) == 27)//°´Ô­FPSÏÔÊ¾  
+		if (waitKey(10) == 27)//æŒ‰åŸFPSæ˜¾ç¤º  
 		{
 			break;
 		}

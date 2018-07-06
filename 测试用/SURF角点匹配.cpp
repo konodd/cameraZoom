@@ -1,4 +1,4 @@
-//#include <opencv2\highgui\highgui.hpp>
+Ôªø//#include <opencv2\highgui\highgui.hpp>
 //#include <opencv2\features2d\features2d.hpp>
 #include <opencv2\xfeatures2d\nonfree.hpp>
 #include <opencv2\opencv.hpp>
@@ -13,7 +13,7 @@ int fps()
 	++frameCount;
 
 	int curTime = cv::getTickCount();
-	if ((curTime - lastTime) / cv::getTickFrequency() > 1.0) // »°πÃ∂® ±º‰º‰∏ÙŒ™1√Î
+	if ((curTime - lastTime) / cv::getTickFrequency() > 1.0) // ÂèñÂõ∫ÂÆöÊó∂Èó¥Èó¥Èöî‰∏∫1Áßí
 	{
 		fps = frameCount;
 		frameCount = 0;
@@ -70,7 +70,7 @@ int main()
 		cv::Mat H = cv::findHomography(obj, scene, cv::RANSAC);
 		cv::perspectiveTransform(obj_corners, scene_corners, H);
 
-		cv::line(img_match, scene_corners[0] + cv::Point2f((float)img_wide.cols, 0), scene_corners[1] + cv::Point2f((float)img_wide.cols, 0), cv::Scalar(0, 255, 0), 2, cv::LINE_AA);       //ªÊ÷∆
+		cv::line(img_match, scene_corners[0] + cv::Point2f((float)img_wide.cols, 0), scene_corners[1] + cv::Point2f((float)img_wide.cols, 0), cv::Scalar(0, 255, 0), 2, cv::LINE_AA);       //ÁªòÂà∂
 		cv::line(img_match, scene_corners[1] + cv::Point2f((float)img_wide.cols, 0), scene_corners[2] + cv::Point2f((float)img_wide.cols, 0), cv::Scalar(0, 255, 0), 2, cv::LINE_AA);
 		cv::line(img_match, scene_corners[2] + cv::Point2f((float)img_wide.cols, 0), scene_corners[3] + cv::Point2f((float)img_wide.cols, 0), cv::Scalar(0, 255, 0), 2, cv::LINE_AA);
 		cv::line(img_match, scene_corners[3] + cv::Point2f((float)img_wide.cols, 0), scene_corners[0] + cv::Point2f((float)img_wide.cols, 0), cv::Scalar(0, 255, 0), 2, cv::LINE_AA);

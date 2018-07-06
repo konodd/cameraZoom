@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 //adress of XL-320
 #define ADDR_ID 3

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <opencv2\opencv.hpp>
 #include <vector>
 
@@ -9,7 +9,7 @@ void getDualOffset(cv::Mat &frame_wide, cv::Mat &frame_long)
 		cv::Mat frame_wide_gray, frame_long_gray;
 		std::vector<cv::Vec3f> circles_wide, circles_long;
 		int x_offset, int y_offset;
-		//»ô·òÔ²¼ì²â
+		//éœå¤«åœ†æ£€æµ‹
 		cv::cvtColor(frame_wide, frame_wide_gray, cv::COLOR_BGR2GRAY);
 		cv::cvtColor(frame_long, frame_long_gray, cv::COLOR_BGR2GRAY);
 		cv::GaussianBlur(frame_wide_gray, frame_wide_gray, cv::Size(9, 9), 2, 2);
@@ -24,7 +24,7 @@ void getDualOffset(cv::Mat &frame_wide, cv::Mat &frame_long)
 		{
 			cv::circle(frame_wide, cv::Point(circles_wide[0][0], circles_wide[0][1]), circles_wide[0][2], cv::Scalar(0, 0, 255), 3);
 		}
-		//¼ÇÂ¼Ô²ĞÄÔÚÁ½Í¼Ö®¼äµÄ×ø±ê²î
+		//è®°å½•åœ†å¿ƒåœ¨ä¸¤å›¾ä¹‹é—´çš„åæ ‡å·®
 		if (!circles_wide.empty() && !circles_long.empty())
 		{
 			x_offset = circles_long[0][0] - circles_wide[0][0];
