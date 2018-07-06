@@ -1,8 +1,10 @@
-#include <opencv2\opencv.hpp>
-#include <kcftracker.hpp>
+#include "front_vision.hpp"
+#include "getOffset.h"
 #include <string>
 #include <vector>
-#include "getOffset.h"
+
+int WIDTH_THRESHOLD;
+int HEIGHT_THRESHOLD;
 
 int fps()
 {
@@ -22,72 +24,38 @@ int fps()
 	return fps;
 }
 
-int main()
-{
-	getDualOffset(1, 2);
-	return 0;
-}
-
 int _main(int argc, char **argv)
 {
-	cv::CascadeClassifier cas("E:/ROS/xl320_driver/haarcascades/haarcascade_frontalface_alt.xml");  //级联检测
-	cv::VideoCapture cap_wide(0);                                                  //广角摄像头
-	cv::VideoCapture cap_long(1);                                                  //长焦摄像头
+	visionToolbox vtb = visionToolbox();                                           //视觉工具箱
+	cv::VideoCapture cap_wide(1);                                                  //广角摄像头
+	cv::VideoCapture cap_long(2);                                                  //长焦摄像头
 	std::vector<cv::Rect> face_boxes;                                              //人脸框
-	cv::Rect2d tracking_box;                                                       //跟踪目标
+	cv::Rect tracking_box;                                                         //跟踪目标
 	cv::Mat frame_wide;
 	cv::Mat frame_long;
 	cv::Mat frame_face;
-
-	bool HOG = true;
-	bool FIXEDWINDOW = false;
-	bool MULTISCALE = true;
-	bool LAB = false;
-	KCFTracker tracker_kcf(HOG, FIXEDWINDOW, MULTISCALE, LAB);
+	int x_offset = 0;
+	int y_offset = 0;
 
 	char str[20];
 	bool is_detected = false;
 
-	while (cap_wide.isOpened())
+	while (cap_wide.isOpened() && cap_long.isOpened())
 	{
 		cap_wide >> frame_wide;
-		if (frame_wide.empty())
+		cap_long >> frame_long;
+		if (frame_wide.empty() && frame_long.empty())
 		{
 			continue;
 		}
-		//检测
-		if (!is_detected)
-		{
-			cv::putText(frame_wide, "detecting face", cv::Point(0, 20), cv::FONT_HERSHEY_COMPLEX, 0.6, cv::Scalar(255, 0, 0));
-			cas.detectMultiScale(frame_wide, face_boxes);
-			//检测到目标后，初始化跟踪模块
-			if (!face_boxes.empty())
-			{
-				tracking_box = face_boxes[0];
-				tracker_kcf.init(tracking_box, frame_wide);
-				is_detected = true;
-			}
-		}
-		//跟踪
-		else
-		{
-			try
-			{
-				tracking_box = tracker_kcf.update(frame_wide);
-				frame_face = frame_wide(tracking_box);
-				cv::rectangle(frame_wide, tracking_box, cv::Scalar(0, 0, 255));
-				cv::imshow("face", frame_face);
-			}
-			catch (const std::exception&)
-			{
-				printf("tracking failed!!!\n");
-				is_detected = false;
-			}
-		}
+		
+		getDualOffset(frame_wide, frame_long, x_offset, y_offset);
+		
 		//显示图片及按键操作
-		sprintf(str, "FPS:%d", fps());
-		cv::putText(frame_wide, str, cv::Point(540, 30), cv::FONT_HERSHEY_SIMPLEX, 0.8, cv::Scalar(255, 0, 0));
-		cv::imshow("test", frame_wide);
+		//sprintf(str, "FPS:%d", fps());
+		//cv::putText(frame_wide, str, cv::Point(540, 30), cv::FONT_HERSHEY_SIMPLEX, 0.8, cv::Scalar(255, 0, 0));
+		cv::imshow("wide", frame_wide);
+		cv::imshow("long", frame_long);
 		int opt = cv::waitKey(10);
 		switch (opt)
 		{
@@ -95,7 +63,7 @@ int _main(int argc, char **argv)
 			cv::waitKey(0);
 			break;
 		case ' ':                                //重新检测
-			is_detected = false;
+			printf("x_offset = %d, y_offset = %d\n", x_offset, y_offset);
 			break;
 		case 'q':
 			return 1;

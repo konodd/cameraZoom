@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="doubleCamera.cpp">
+    <ClCompile Include="dualZoom.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

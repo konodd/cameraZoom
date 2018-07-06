@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "多尺度KCF", "多尺度KC
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "运动目标检测", "运动目标检测\运动目标检测.vcxproj", "{23F17662-9403-46E8-B2B2-E8DE0B37197D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "测试用", "测试用\测试用.vcxproj", "{AB6BAB2B-C678-4447-BD7B-AAEE77D167DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{23F17662-9403-46E8-B2B2-E8DE0B37197D}.Release|x64.Build.0 = Release|x64
 		{23F17662-9403-46E8-B2B2-E8DE0B37197D}.Release|x86.ActiveCfg = Release|Win32
 		{23F17662-9403-46E8-B2B2-E8DE0B37197D}.Release|x86.Build.0 = Release|Win32
+		{AB6BAB2B-C678-4447-BD7B-AAEE77D167DC}.Debug|x64.ActiveCfg = Debug|x64
+		{AB6BAB2B-C678-4447-BD7B-AAEE77D167DC}.Debug|x64.Build.0 = Debug|x64
+		{AB6BAB2B-C678-4447-BD7B-AAEE77D167DC}.Debug|x86.ActiveCfg = Debug|Win32
+		{AB6BAB2B-C678-4447-BD7B-AAEE77D167DC}.Debug|x86.Build.0 = Debug|Win32
+		{AB6BAB2B-C678-4447-BD7B-AAEE77D167DC}.Release|x64.ActiveCfg = Release|x64
+		{AB6BAB2B-C678-4447-BD7B-AAEE77D167DC}.Release|x64.Build.0 = Release|x64
+		{AB6BAB2B-C678-4447-BD7B-AAEE77D167DC}.Release|x86.ActiveCfg = Release|Win32
+		{AB6BAB2B-C678-4447-BD7B-AAEE77D167DC}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

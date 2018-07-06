@@ -11,8 +11,8 @@ public:
 	void circleDetect(cv::Mat img, std::vector<cv::Vec3f> &circles);                                          //霍夫圆检测
 	void faceDetect(cv::Mat img, std::vector<cv::Rect> &face_boxes);                                          //人脸检测
 	void movingObjectDetect(cv::Mat img_last, cv::Mat img_current, std::vector<cv::Rect> &object_boxes);      //移动物体检测
-	void trackingKCF(cv::Mat img, cv::Rect &box);                                                             //KCF跟踪
-	bool trackingKCFOpenCV(cv::Mat img, cv::Rect2d &box, bool is_init);                                                       //OpenCV KCF跟踪
+	void trackingKCF(cv::Mat img, cv::Rect &box, bool is_init = true);                                        //KCF跟踪
+	bool trackingKCFOpenCV(cv::Mat img, cv::Rect2d &box, bool is_init = true);                                //OpenCV KCF跟踪
 
 private:
 	cv::CascadeClassifier cas;                   //级联检测器
@@ -20,7 +20,7 @@ private:
 	cv::Ptr<cv::TrackerKCF> tracker_kcf_opencv;  //opencv KCF跟踪器
 
 	bool face_detect_init;                       //用于第一次执行人脸检测时的初始化
-	bool tracking_KCF_init;                      //用于第一次执行人脸检测时的初始化
+	bool tracking_KCF_init;                      //用于第一次执行KCF跟踪时的初始化
 };
 
 visionToolbox::visionToolbox() 
@@ -39,7 +39,7 @@ void visionToolbox::circleDetect(cv::Mat img, std::vector<cv::Vec3f> &circles)
 		cv::cvtColor(img, img_gray, cv::COLOR_BGR2GRAY);
 		//霍夫圆检测，参数可调节
 		cv::GaussianBlur(img_gray, img_gray, cv::Size(9, 9), 2, 2);
-		cv::HoughCircles(img_gray, circles, CV_HOUGH_GRADIENT, 1, img_gray.rows / 8, 60, 40);
+		cv::HoughCircles(img_gray, circles, cv::HOUGH_GRADIENT, 1, img_gray.rows / 8, 60, 40);
 	}
 	catch (const std::exception&)
 	{
@@ -97,21 +97,19 @@ void visionToolbox::movingObjectDetect(cv::Mat img_last, cv::Mat img_current, st
 	}
 }
 
-void visionToolbox::trackingKCF(cv::Mat img, cv::Rect &box)
+void visionToolbox::trackingKCF(cv::Mat img, cv::Rect &box, bool is_init)
 {
-	try
+	if (!tracking_KCF_init)
 	{
-		if (!tracking_KCF_init)
-		{
-			tracker_kcf = KCFTracker();
-			tracking_KCF_init = true;
-		}
-		box = tracker_kcf.update(img);
+		tracker_kcf = KCFTracker();
+		tracking_KCF_init = true;
 	}
-	catch (const std::exception&)
+	if (!is_init)
 	{
-		printf("Exception in trackingKCF module!\n");
+		tracker_kcf.init(box, img);
+		return;
 	}
+	box = tracker_kcf.update(img);
 }
 
 bool visionToolbox::trackingKCFOpenCV(cv::Mat img, cv::Rect2d &box, bool is_init)
