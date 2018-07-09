@@ -61,6 +61,7 @@ bool controlToolBox::init()
 		printf("Failed to change port baudrate!\n");
 		return false;
 	}
+	return true;
 }
 
 void controlToolBox::setBaudRate(int8_t id, int8_t value)

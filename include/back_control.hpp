@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <dynamixel_sdk.h>
 #include "xl320_param.h"
 
@@ -8,17 +8,17 @@ public:
 	controlToolBox();
 	~controlToolBox();
 	bool init();
-	void setBaudRate(int8_t id, int8_t value);           //ÉèÖÃ²¨ÌØÂÊ£º0±íÊ¾9600bps£¬1±íÊ¾57600bps£¬2±íÊ¾115200bps£¬3±íÊ¾1Mbps
-	void setOperatingMode(int8_t id, int8_t value);      //ÉèÖÃ²Ù×÷Ä£Ê½£º0±íÊ¾ËÙ¶È£¬1±íÊ¾½Ç¶È
-	void setTorqueEnable(int8_t id, int8_t value);       //ÉèÖÃ×ª¾ØÊÇ·ñ¿ÉÓÃ£º0±íÊ¾²»¿ÉÓÃ£¬1±íÊ¾¿ÉÓÃ
-	void setLED(int8_t id, int8_t value);                //ÉèÖÃLEDµÆ£º0²»¿ÉÓÃ£¬1ºì£¬2ÂÌ£¬3»Æ£¬4À¶£¬5·Û£¬6À¶ÂÌ£¬7°×
-	void setGoalPosition(int8_t id, int16_t value);      //ÉèÖÃÈ«¾ÖÎ»ÖÃ
-	void setGoalVelocity(int8_t id, int16_t value);      //ÉèÖÃÈ«¾ÖËÙ¶È
-	void setGoalTorque(int8_t id, int16_t value);        //ÉèÖÃÈ«¾Ö×ª¾Ø
-	int getPresentPosition(int8_t id);                   //»ñÈ¡µ±Ç°Î»ÖÃ
-	int getPresentVelocity(int8_t id);                   //»ñÈ¡µ±Ç°ËÙ¶È
+	void setBaudRate(int8_t id, int8_t value);           //è®¾ç½®æ³¢ç‰¹çŽ‡ï¼š0è¡¨ç¤º9600bpsï¼Œ1è¡¨ç¤º57600bpsï¼Œ2è¡¨ç¤º115200bpsï¼Œ3è¡¨ç¤º1Mbps
+	void setOperatingMode(int8_t id, int8_t value);      //è®¾ç½®æ“ä½œæ¨¡å¼ï¼š0è¡¨ç¤ºé€Ÿåº¦ï¼Œ1è¡¨ç¤ºè§’åº¦
+	void setTorqueEnable(int8_t id, int8_t value);       //è®¾ç½®è½¬çŸ©æ˜¯å¦å¯ç”¨ï¼š0è¡¨ç¤ºä¸å¯ç”¨ï¼Œ1è¡¨ç¤ºå¯ç”¨
+	void setLED(int8_t id, int8_t value);                //è®¾ç½®LEDç¯ï¼š0ä¸å¯ç”¨ï¼Œ1çº¢ï¼Œ2ç»¿ï¼Œ3é»„ï¼Œ4è“ï¼Œ5ç²‰ï¼Œ6è“ç»¿ï¼Œ7ç™½
+	void setGoalPosition(int8_t id, int16_t value);      //è®¾ç½®å…¨å±€ä½ç½®
+	void setGoalVelocity(int8_t id, int16_t value);      //è®¾ç½®å…¨å±€é€Ÿåº¦
+	void setGoalTorque(int8_t id, int16_t value);        //è®¾ç½®å…¨å±€è½¬çŸ©
+	int getPresentPosition(int8_t id);                   //èŽ·å–å½“å‰ä½ç½®
+	int getPresentVelocity(int8_t id);                   //èŽ·å–å½“å‰é€Ÿåº¦
 	int getPresentLoad(int8_t id);
-	bool isMoving(int8_t id);                            //ÅÐ¶Ï¶æ»úÊÇ·ñÔÚ×ª¶¯
+	bool isMoving(int8_t id);                            //åˆ¤æ–­èˆµæœºæ˜¯å¦åœ¨è½¬åŠ¨
 
 private:
 	dynamixel::PortHandler *portHandler;
@@ -41,7 +41,7 @@ bool controlToolBox::init()
 	bulkWrite = new dynamixel::GroupBulkWrite(portHandler, packetHandler);
 	bulkRead = new dynamixel::GroupBulkRead(portHandler, packetHandler);
 	dxl_comm_result = COMM_TX_FAIL;
-	//´ò¿ª¶Ë¿Ú
+	//æ‰“å¼€ç«¯å£
 	if (portHandler->openPort())
 	{
 		printf("Port is opened!\n");
@@ -51,7 +51,7 @@ bool controlToolBox::init()
 		printf("Port open failed!!!\n");
 		return false;
 	}
-	//ÉèÖÃ¶Ë¿Ú²¨ÌØÂÊ£¬ÐèÓë¶æ»úÒ»Ñù²ÅÄÜ¼ì²âµ½
+	//è®¾ç½®ç«¯å£æ³¢ç‰¹çŽ‡ï¼Œéœ€ä¸Žèˆµæœºä¸€æ ·æ‰èƒ½æ£€æµ‹åˆ°
 	if (portHandler->setBaudRate(BAUDRATE))
 	{
 		printf("Succeeded to change port baudrate!\n");
@@ -61,6 +61,7 @@ bool controlToolBox::init()
 		printf("Failed to change port baudrate!\n");
 		return false;
 	}
+	return true;
 }
 
 void controlToolBox::setBaudRate(int8_t id, int8_t value)

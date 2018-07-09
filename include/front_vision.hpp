@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <opencv2\opencv.hpp>
 #include <opencv2\tracking\tracker.hpp>
 #include <kcftracker.hpp>
@@ -8,19 +8,19 @@ class visionToolbox
 public:
 	visionToolbox();
 	~visionToolbox();
-	void circleDetect(cv::Mat img, std::vector<cv::Vec3f> &circles);                                          //»ô·òÔ²¼ì²â
-	void faceDetect(cv::Mat img, std::vector<cv::Rect> &face_boxes);                                          //ÈËÁ³¼ì²â
-	void movingObjectDetect(cv::Mat img_last, cv::Mat img_current, std::vector<cv::Rect> &object_boxes);      //ÒÆ¶¯ÎïÌå¼ì²â
-	void trackingKCF(cv::Mat img, cv::Rect &box, bool is_init = true);                                        //KCF¸ú×Ù
-	bool trackingKCFOpenCV(cv::Mat img, cv::Rect2d &box, bool is_init = true);                                //OpenCV KCF¸ú×Ù
+	void circleDetect(cv::Mat img, std::vector<cv::Vec3f> &circles);                                          //éœå¤«åœ†æ£€æµ‹
+	void faceDetect(cv::Mat img, std::vector<cv::Rect> &face_boxes);                                          //äººè„¸æ£€æµ‹
+	void movingObjectDetect(cv::Mat img_last, cv::Mat img_current, std::vector<cv::Rect> &object_boxes);      //ç§»åŠ¨ç‰©ä½“æ£€æµ‹
+	void trackingKCF(cv::Mat img, cv::Rect &box, bool is_init = true);                                        //KCFè·Ÿè¸ª
+	bool trackingKCFOpenCV(cv::Mat img, cv::Rect2d &box, bool is_init = true);                                //OpenCV KCFè·Ÿè¸ª
 
 private:
-	cv::CascadeClassifier cas;                   //¼¶Áª¼ì²âÆ÷
-	KCFTracker tracker_kcf;                      //KCF¸ú×ÙÆ÷
-	cv::Ptr<cv::TrackerKCF> tracker_kcf_opencv;  //opencv KCF¸ú×ÙÆ÷
+	cv::CascadeClassifier cas;                   //çº§è”æ£€æµ‹å™¨
+	KCFTracker tracker_kcf;                      //KCFè·Ÿè¸ªå™¨
+	cv::Ptr<cv::TrackerKCF> tracker_kcf_opencv;  //opencv KCFè·Ÿè¸ªå™¨
 
-	bool face_detect_init;                       //ÓÃÓÚµÚÒ»´ÎÖ´ĞĞÈËÁ³¼ì²âÊ±µÄ³õÊ¼»¯
-	bool tracking_KCF_init;                      //ÓÃÓÚµÚÒ»´ÎÖ´ĞĞÈËÁ³¼ì²âÊ±µÄ³õÊ¼»¯
+	bool face_detect_init;                       //ç”¨äºç¬¬ä¸€æ¬¡æ‰§è¡Œäººè„¸æ£€æµ‹æ—¶çš„åˆå§‹åŒ–
+	bool tracking_KCF_init;                      //ç”¨äºç¬¬ä¸€æ¬¡æ‰§è¡ŒKCFè·Ÿè¸ªæ—¶çš„åˆå§‹åŒ–
 };
 
 visionToolbox::visionToolbox() 
@@ -37,9 +37,9 @@ void visionToolbox::circleDetect(cv::Mat img, std::vector<cv::Vec3f> &circles)
 	{
 		cv::Mat img_gray;
 		cv::cvtColor(img, img_gray, cv::COLOR_BGR2GRAY);
-		//»ô·òÔ²¼ì²â£¬²ÎÊı¿Éµ÷½Ú
+		//éœå¤«åœ†æ£€æµ‹ï¼Œå‚æ•°å¯è°ƒèŠ‚
 		cv::GaussianBlur(img_gray, img_gray, cv::Size(9, 9), 2, 2);
-		cv::HoughCircles(img_gray, circles, CV_HOUGH_GRADIENT, 1, img_gray.rows / 8, 60, 40);
+		cv::HoughCircles(img_gray, circles, cv::HOUGH_GRADIENT, 1, img_gray.rows / 8, 60, 40);
 	}
 	catch (const std::exception&)
 	{
@@ -53,7 +53,7 @@ void visionToolbox::faceDetect(cv::Mat img, std::vector<cv::Rect> &face_boxes)
 	{
 		if (!face_detect_init)
 		{
-			//¿É×ÔÓÉ¼ÓÔØ¼¶Áª¼ì²âÄ£ĞÍ
+			//å¯è‡ªç”±åŠ è½½çº§è”æ£€æµ‹æ¨¡å‹
 			cas.load("E:/ROS/xl320_driver/haarcascades/haarcascade_frontalface_alt.xml");
 			face_detect_init = true;
 		}
@@ -72,20 +72,20 @@ void visionToolbox::movingObjectDetect(cv::Mat img_last, cv::Mat img_current, st
 		cv::Mat img_last_gray, img_current_gray;
 		cv::Mat tmp;
 		std::vector<std::vector<cv::Point>> contours;
-		//×ªÎª»Ò¶ÈÍ¼
+		//è½¬ä¸ºç°åº¦å›¾
 		cv::cvtColor(img_last, img_last_gray, cv::COLOR_BGR2GRAY);
 		cv::cvtColor(img_current, img_current_gray, cv::COLOR_BGR2GRAY);
-		//½«ÉÏÒ»Ö¡ºÍµ±Ç°Ö¡×ö²î
+		//å°†ä¸Šä¸€å¸§å’Œå½“å‰å¸§åšå·®
 		cv::absdiff(img_last_gray, img_current_gray, tmp);
-		//½«²îÖµÍ¼½øĞĞãĞÖµ»¯´¦Àí
+		//å°†å·®å€¼å›¾è¿›è¡Œé˜ˆå€¼åŒ–å¤„ç†
 		cv::threshold(tmp, tmp, 50, 255, CV_THRESH_BINARY);
-		//¸¯Ê´
+		//è…èš€
 		cv::erode(tmp, tmp, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(3, 3)));
-		//ÅòÕÍ
+		//è†¨èƒ€
 		cv::dilate(tmp, tmp, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(18, 18)));
-		//Ñ°ÕÒÔË¶¯ÎïÌåµÄÂÖÀª
+		//å¯»æ‰¾è¿åŠ¨ç‰©ä½“çš„è½®å»“
 		cv::findContours(tmp, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_NONE);
-		//ÓÃ¿ò¿ò³öÂÖÀª
+		//ç”¨æ¡†æ¡†å‡ºè½®å»“
 		for (int i = 0; i < contours.size(); i++)
 		{
 			object_boxes[i] = cv::boundingRect(contours[i]);
